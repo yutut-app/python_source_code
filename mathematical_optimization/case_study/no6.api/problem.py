@@ -1,7 +1,6 @@
 import pandas as pd
 import pulp
 
-
 class CarGroupProblem():
     """学生の乗車グループ分け問題を解くクラス"""
     def __init__(self, students_df, cars_df, name='ClubCarProblem'):
@@ -88,7 +87,7 @@ class CarGroupProblem():
 if __name__ == '__main__':
     # データの読み込み
     students_df = pd.read_csv('resource/students.csv')
-    cars_df = pd.read_csv('resource/cars.csv')
+    cars_df = pd.read_csv('resource/resource/cars.csv')
 
     # 数理モデル インスタンスの作成
     prob = CarGroupProblem(students_df, cars_df)
