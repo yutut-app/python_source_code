@@ -1,17 +1,20 @@
+# NFL Helmet Assignment - Getting Started Guide
+
 ## 概要
 このプロジェクトは、NFLヘルメット割り当て課題の解決を支援するためのガイドです。データの読み込み、特徴量の追加、スコアリング、可視化、ベースライン提出の作成を行います。
 
 ## セットアップ
 
-1. 必要なライブラリをインストールします：
+1. 仮想環境を作成してアクティブにします：
    ```bash
-   pip install pandas matplotlib opencv-python ipython plotly scikit-learn
+   python -m venv myenv
+   .\venv\Scripts\activate
    ```
-2. `inputs` ディレクトリを作成します（存在しない場合）。
 
-3. データファイルを `inputs` ディレクトリに配置します。
-
-4. `outputs` ディレクトリを作成します（存在しない場合）。
+2. 必要なライブラリをインストールします：
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## スクリプトの説明
 
