@@ -1,49 +1,53 @@
+"""NFLのコンペデータを読み込み、前処理するモジュール"""
+
 import pandas as pd
 
 def load_data():
-    BASE_DIR = 'inputs'
-    
-    # 各種データをCSVファイルから読み込む
-    labels = pd.read_csv(f'{BASE_DIR}/train_labels.csv')
-    ss = pd.read_csv(f'{BASE_DIR}/sample_submission.csv')
-    tr_tracking = pd.read_csv(f'{BASE_DIR}/train_player_tracking.csv')
-    te_tracking = pd.read_csv(f'{BASE_DIR}/test_player_tracking.csv')
-    tr_helmets = pd.read_csv(f'{BASE_DIR}/train_baseline_helmets.csv')
-    te_helmets = pd.read_csv(f'{BASE_DIR}/test_baseline_helmets.csv')
-    img_labels = pd.read_csv(f'{BASE_DIR}/image_labels.csv')
-
-    return labels, ss, tr_tracking, te_tracking, tr_helmets, te_helmets, img_labels
-
-
-def add_track_features(tracks, fps=59.94, snap_frame=10):
     """
-    ビデオデータと同期するために便利な特徴量をトラッキングデータに追加する。
+    NFL 競技に必要なデータファイルを全てロードする。
+    """
+    base_directory = 'inputs'
+
+    labels = pd.read_csv(f'{base_directory}/train_labels.csv')
+    sample_submission = pd.read_csv(f'{base_directory}/sample_submission.csv')
+    train_tracking = pd.read_csv(f'{base_directory}/train_player_tracking.csv')
+    test_tracking = pd.read_csv(f'{base_directory}/test_player_tracking.csv')
+    train_helmets = pd.read_csv(f'{base_directory}/train_baseline_helmets.csv')
+    test_helmets = pd.read_csv(f'{base_directory}/test_baseline_helmets.csv')
+    image_labels = pd.read_csv(f'{base_directory}/image_labels.csv')
+
+    return (
+        labels,
+        sample_submission,
+        train_tracking,
+        test_tracking,
+        train_helmets,
+        test_helmets,
+        image_labels
+    )
+
+def add_track_features(tracks, frames_per_second=59.94, snap_frame=10):
+    """
+    ビデオデータとトラッキングデータの同期に役立つカラム機能を追加
     """
     tracks = tracks.copy()
-    
-    # ゲームとプレイのIDを結合してgame_play列を作成
     tracks["game_play"] = (
         tracks["gameKey"].astype("str")
         + "_"
         + tracks["playID"].astype("str").str.zfill(6)
     )
     tracks["time"] = pd.to_datetime(tracks["time"])
-    
-    # スナップ時刻の辞書を作成
-    snap_dict = (
+    snap_dictionary = (
         tracks.query('event == "ball_snap"')
         .groupby("game_play")["time"]
         .first()
         .to_dict()
     )
-    tracks["snap"] = tracks["game_play"].map(snap_dict)
+    tracks["snap"] = tracks["game_play"].map(snap_dictionary)
     tracks["isSnap"] = tracks["snap"] == tracks["time"]
     tracks["team"] = tracks["player"].str[0].replace("H", "Home").replace("V", "Away")
-    # スナップ時刻からのオフセットを計算
     tracks["snap_offset"] = (tracks["time"] - tracks["snap"]).dt.total_seconds()
-    
-    # 推定ビデオフレームを計算
-    tracks["est_frame"] = (
-        ((tracks["snap_offset"] * fps) + snap_frame).round().astype("int")
+    tracks["estimated_frame"] = (
+        ((tracks["snap_offset"] * frames_per_second) + snap_frame).round().astype("int")
     )
     return tracks
