@@ -1,11 +1,11 @@
-"""NFLヘルメットの課題提出採点用モジュール"""
+"""NFLヘルメットの課題提出スコアリングモジュール"""
 
 import pandas as pd
 import numpy as np
 from sklearn.metrics import accuracy_score
 
 class NFLAssignmentScorer:
-    """NFLのヘルメット課題提出を採点するクラス"""
+    """NFLのヘルメット課題提出をスコアリングするクラス"""
 
     def __init__(
         self,
