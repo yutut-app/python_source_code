@@ -10,24 +10,16 @@
    - ベースラインの提出ファイルを生成する
 
 2. `data_loader.py`
-   - データの読み込みと前処理を行う
-   - `load_data()` 関数: 全ての必要なデータファイルを読み込む
-   - `add_track_features()` 関数: トラッキングデータに追加の特徴量を付与する
+   - NFLのコンペデータを読み込み、前処理するモジュール
 
 3. `scorer.py`
-   - 提出ファイルのスコアリングを行うクラスと関数を含む
-   - `NFLAssignmentScorer` クラス: 提出ファイルを評価し、スコアを計算する
-   - `check_submission()` 関数: 提出ファイルが要件を満たしているかチェックする
+   - 提NFLヘルメットの課題提出採点用モジュール
 
 4. `visualization.py`
-   - データの可視化に関する関数を含む
-   - `video_with_baseline_boxes()`: ビデオにベースラインのボックスと正解ラベルを描画する
-   - `create_football_field()`: フットボールフィールドの図を作成する
-   - `add_plotly_field()`: Plotlyの図にフットボールフィールドを追加する
+   - NFLのヘルメット検出とトラッキングデータを可視化するモジュール
 
 5. `baseline_submission.py`
-   - ベースラインの提出ファイルを生成する関数を含む
-   - `create_random_label_submission()`: ランダムにラベルを割り当てた提出ファイルを作成する
+   - NFL Helmet Assignment Competitionのbaseline submissionを作成するためのモジュール
 
 ## セットアップと使用方法
 
@@ -36,8 +28,7 @@
 1. 仮想環境を作成し、アクティベートします：
    ```
    python -m venv myenv
-   source myenv/bin/activate  # Linuxまたは macOS の場合
-   myenv\Scripts\activate  # Windows の場合
+   myenv\Scripts\activate
    ```
 
 2. 提供されている `requirements.txt` を使用して、必要なライブラリをインストールします：
@@ -73,16 +64,3 @@ project_root/
 ├── baseline_submission.py
 └── README.md
 ```
-
-## 注意事項
-
-- このコードは、Jupyter NotebookやJupyterLab環境での実行も可能です。
-- 大量のデータを扱うため、十分なメモリを持つ環境で実行してください。
-- 可視化の部分では、実行に時間がかかる可能性があります。
-
-## ライセンス
-
-このプロジェクトは [MITライセンス](https://opensource.org/licenses/MIT) のもとで公開されています。
-```
-
-このREADME.mdは、プロジェクトの概要、ファイル構成、セットアップと使用方法、ディレクトリ構造、注意事項、およびライセンス情報を含んでいます。既存のディレクトリ構造とファイルを前提とした説明になっており、プロジェクトの全体像を把握しやすくなっています。
