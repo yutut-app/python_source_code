@@ -60,7 +60,6 @@ project_root/
 ├── inputs/             # 解凍後の入力データディレクトリ
 ├── outputs/            # 処理結果の出力先
 ├── myenv/              # 仮想環境
-
 ├── requirements.txt    # プロジェクトの依存関係リスト
 ├── main.py
 ├── data_loader.py
