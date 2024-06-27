@@ -21,16 +21,16 @@
 
 ## セットアップと使用方法
 
-このプロジェクトでは、入力データが圧縮されており、その他の必要なファイルが既に用意されています。
-
-1. データの解凍:
-   ```
-   unzip inputs.zip -d inputs
-   ```
+1. Kaggleからデータをダウンロードします：
+   - [NFL Health & Safety - Helmet Assignment](https://www.kaggle.com/c/nfl-health-and-safety-helmet-assignment/data) ページにアクセスします。
+   - 'Download All' ボタンをクリックしてデータをダウンロードします。
+   - ダウンロードしたZIPファイルを解凍し、解凍されたフォルダの名前を 'inputs' に変更します。
+   - 'inputs' フォルダをこのプロジェクトのルートディレクトリに移動します。
 
 2. 仮想環境を作成し、アクティベートします：
    ```
    python -m venv myenv
+   source myenv/bin/activate  # Linuxまたは macOS の場合
    myenv\Scripts\activate  # Windows の場合
    ```
 
@@ -39,17 +39,16 @@
    pip install -r requirements.txt
    ```
 
-4. メインスクリプトの実行:
+4. メインスクリプトを実行します：
    ```
    python main.py
    ```
 
 5. 処理結果は `outputs` ディレクトリに保存されます。
 
-注意:
-- 大容量の入力データは `inputs.zip` として提供されています。
+注意：
 - `outputs` ディレクトリは既に存在し、処理結果の保存に使用されます。
-- `requirements.txt` にはプロジェクトの依存関係が記載されています。
+- `requirements.txt` ファイルには、プロジェクトに必要な全ての依存関係が記載されています。
 
 ## ディレクトリ構造
 
