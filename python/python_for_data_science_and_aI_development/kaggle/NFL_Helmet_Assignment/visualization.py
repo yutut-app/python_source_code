@@ -136,7 +136,7 @@ def create_football_field(
     axis=None,
 ):
     """
-    プレーを可視化するためにフットボール場のプロットを作成
+    プレーを可視化するためにフットボールフィールドのプロットを作成
     """
     if axis is None:
         _, axis = plt.subplots(1, figsize=figure_size)
@@ -179,7 +179,7 @@ def create_football_field(
     return axis
 
 def create_end_zones(axis, end_zone_color):
-    """フットボール場にエンドゾーンを作成"""
+    """フットボールフィールドにエンドゾーンを作成"""
     ez1 = patches.Rectangle(
         (0, 0), 10, 53.3, linewidth=0.1,
         edgecolor="black", facecolor=end_zone_color, alpha=0.6, zorder=0
@@ -192,7 +192,7 @@ def create_end_zones(axis, end_zone_color):
     axis.add_patch(ez2)
 
 def add_yard_lines(axis):
-    """フットボール場にヤードラインの番号を追加"""
+    """フットボールフィールドにヤードラインの番号を追加"""
     for x in range(20, 110, 10):
         numb = x if x <= 50 else 120 - x
         axis.text(
@@ -207,7 +207,7 @@ def add_yard_lines(axis):
         )
 
 def add_hash_marks(axis, end_zones):
-    """フットボール場にハッシュマークを追加"""
+    """フットボールフィールドにハッシュマークを追加"""
     hash_range = range(11, 110) if end_zones else range(1, 120)
     for x in hash_range:
         axis.plot([x, x], [0.4, 0.7], color="black")
@@ -216,13 +216,13 @@ def add_hash_marks(axis, end_zones):
         axis.plot([x, x], [29.73, 30.39], color="black")
 
 def highlight_specific_line(axis, highlight_line_number, highlighted_name):
-    """フットボール場の特定の行をハイライトする"""
+    """フットボールフィールドの特定の行をハイライトする"""
     hl = highlight_line_number + 10
     axis.plot([hl, hl], [0, 53.3], color="yellow")
     axis.text(hl + 2, 50, f"<- {highlighted_name}", color="yellow")
 
 def add_border(axis):
-    """フットボール場に境界線を追加"""
+    """フットボールフィールドに境界線を追加"""
     border = patches.Rectangle(
         (-5, -5), 120 + 10, 53.3 + 10, linewidth=0.1,
         edgecolor="orange", facecolor="white", alpha=0, zorder=0
@@ -231,7 +231,7 @@ def add_border(axis):
 
 def add_plotly_field(figure):
     """
-    フットボール場を Plotly 図に追加
+    フットボールフィールドを Plotly 図に追加
     """
     figure.update_traces(marker_size=20)
     

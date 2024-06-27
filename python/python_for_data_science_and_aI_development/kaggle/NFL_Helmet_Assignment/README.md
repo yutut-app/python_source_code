@@ -1,50 +1,61 @@
-## 概要
-このプロジェクトは、NFLヘルメット割り当て課題の解決を支援するためのガイドです。データの読み込み、特徴量の追加、スコアリング、可視化、ベースライン提出の作成を行います。
+# 概要
+このプロジェクトは、NFLのヘルメット割り当てコンペティションのためのコードベースです。ビデオ映像とNFLのNext Gen Stats（NGS）トラッキングデータを活用して、各ヘルメットを正しい選手に割り当てることが目標です。
 
-## セットアップ
+## ファイル構成
 
-1. 必要なライブラリをインストールします：
-   ```bash
-   pip install pandas matplotlib opencv-python ipython plotly scikit-learn
+1. `main.py`: メインスクリプト
+2. `data_loader.py`: データ読み込みと前処理
+3. `scorer.py`: スコアリング機能
+4. `visualization.py`: データ可視化機能
+5. `baseline_submission.py`: ベースライン提出ファイル生成
+
+## セットアップと使用方法
+
+このプロジェクトでは、入力データが圧縮されており、その他の必要なファイルが既に用意されています。
+
+1. データの解凍:
    ```
-2. `inputs` ディレクトリを作成します（存在しない場合）。
+   unzip inputs.zip -d inputs
+   ```
 
-3. データファイルを `inputs` ディレクトリに配置します。
+2. 仮想環境の作成とアクティベート:
+   ```
+   python -m venv myenv
+   source myenv/bin/activate  # Linuxまたは macOS の場合
+   myenv\Scripts\activate  # Windows の場合
+   ```
 
-4. `outputs` ディレクトリを作成します（存在しない場合）。
+3. 依存関係のインストール:
+   ```
+   pip install -r requirements.txt
+   ```
 
-## スクリプトの説明
+4. メインスクリプトの実行:
+   ```
+   python main.py
+   ```
 
-### main.py
-メインスクリプトであり、以下の処理を行います：
-1. データの読み込み
-2. 提出ファイルのスコアリング
-3. インパクトと非インパクトのスコアリング
-4. 可視化の例
-5. ベースライン提出ファイルの作成
+5. 処理結果は `outputs` ディレクトリに保存されます。
 
-### data_loader.py
-データのロードと特徴量の追加を行います：
-- `load_data`: 各種データをCSVファイルから読み込みます。
-- `add_track_features`: ビデオデータと同期するための特徴量を追加します。
+注意:
+- 大容量の入力データは `inputs.zip` として提供されています。
+- `outputs` ディレクトリは既に存在し、処理結果の保存に使用されます。
+- `requirements.txt` にはプロジェクトの依存関係が記載されています。
 
-### scorer.py
-提出ファイルのスコアリングを行います：
-- `NFLAssignmentScorer`: 提出ファイルを評価するクラス。提出ファイルと正解ラベルを結合し、IoUを計算してスコアを算出します。
-- `check_submission`: 提出ファイルが制約を満たしているか確認します。
+## ディレクトリ構造
 
-### visualization.py
-データの可視化を行います：
-- `video_with_baseline_boxes`: ビデオにベースラインモデルのボックスと正解ボックスを注釈します。
-- `create_football_field`: プレイの表示用にフットボールフィールドをプロットします。
-- `add_plotly_field`: Plotlyフィールドを追加します。
-
-### baseline_submission.py
-ベースライン提出ファイルを作成します：
-- `random_label_submission`: 各フレームの最も自信のある22個のヘルメットボックスに基づいてランダムに割り当てられたヘルメットを持つベースライン提出ファイルを作成します。
-
-## 出力
-
-- スコアリング結果がコンソールに表示されます。
-- 処理されたビデオが `outputs/labeled_output.mp4` に保存されます。
-- ベースライン提出が `outputs/submission.csv` に保存されます。
+```
+project_root/
+│
+├── inputs.zip          # 圧縮された入力データファイル
+├── inputs/             # 解凍後の入力データディレクトリ
+├── outputs/            # 処理結果の出力先
+├── myenv/              # 仮想環境
+├── requirements.txt    # プロジェクトの依存関係リスト
+├── main.py
+├── data_loader.py
+├── scorer.py
+├── visualization.py
+├── baseline_submission.py
+└── README.md
+```

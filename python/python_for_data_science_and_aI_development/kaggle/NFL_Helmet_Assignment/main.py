@@ -17,7 +17,7 @@ def visualize_tracking_data(tracking_data):
     game_play = "57584_000336"
     example_tracks = tracking_data.query("game_play == @game_play and isSnap == True")
     
-    # フットボール場のプロットを作成
+    # フットボールフィールドのプロットを作成
     ax = create_football_field()
     for team, team_data in example_tracks.groupby("team"):
         ax.scatter(team_data["x"], team_data["y"], label=team, s=65, lw=1, edgecolors="black", zorder=5)
